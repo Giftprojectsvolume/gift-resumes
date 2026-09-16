@@ -1,0 +1,197 @@
+/* ============================================================
+   Shared CV document structure — every template uses this.
+   break-inside/break-after rules here are what keep content
+   from being awkwardly split once this is printed to PDF.
+   ============================================================ */
+
+.cv-page {
+  width: 794px;
+  min-height: 1123px;
+  background: #ffffff;
+  color: #1a1a1a;
+  padding: 56px 60px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.cv-header {
+  margin-bottom: 24px;
+}
+
+.cv-name {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.cv-contact-line {
+  font-size: 13px;
+  color: #444;
+}
+
+.cv-section {
+  margin-bottom: 20px;
+}
+
+.cv-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1.5px solid #ddd;
+  padding-bottom: 4px;
+  margin: 0 0 12px;
+  break-after: avoid; /* a heading should never be the last line on a page */
+}
+
+.cv-entry {
+  margin-bottom: 14px;
+  break-inside: avoid; /* one job/qualification/entry never splits across pages */
+}
+
+.cv-entry-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.cv-entry-title {
+  flex: 1;
+  min-width: 0; /* lets long job titles/employers actually wrap instead of overflowing the page width */
+}
+
+.cv-entry-dates {
+  font-weight: 400;
+  color: #555;
+  font-size: 12.5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cv-entry-body {
+  margin: 4px 0 0;
+  font-size: 13.5px;
+  color: #333;
+  white-space: pre-wrap;
+}
+
+.cv-summary-text {
+  font-size: 13.5px;
+  color: #333;
+  white-space: pre-wrap;
+}
+
+.cv-skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cv-skill-tag {
+  font-size: 12.5px;
+  padding: 4px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  .cv-page {
+    box-shadow: none;
+  }
+}
+
+/* Printing shows ONLY this hidden full-scale copy of the CV —
+   never the on-screen scaled/transformed preview wrapper — so
+   the browser's own pagination engine (not our approximate JS
+   guide lines) is the one actually laying out the PDF pages. */
+.print-only-cv {
+  display: none;
+}
+
+@media print {
+  .print-only-cv {
+    display: block;
+  }
+}
+
+/* ============================================================
+   Template skins — presentation only, structure above is
+   never duplicated or altered per template.
+   ============================================================ */
+
+/* Clean Professional */
+.tpl-clean-professional .cv-name {
+  color: #1e2a3a;
+}
+.tpl-clean-professional .cv-section-title {
+  color: #1e2a3a;
+  border-bottom-color: #b8862e;
+}
+
+/* ATS Friendly — pure black and white, no decoration */
+.tpl-ats-friendly {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.tpl-ats-friendly .cv-name,
+.tpl-ats-friendly .cv-contact-line,
+.tpl-ats-friendly .cv-entry-body,
+.tpl-ats-friendly .cv-summary-text {
+  color: #000;
+}
+.tpl-ats-friendly .cv-section-title {
+  color: #000;
+  border-bottom: 1px solid #000;
+}
+.tpl-ats-friendly .cv-skill-tag {
+  border: 1px solid #000;
+  border-radius: 0;
+}
+
+/* Modern Professional — colored header band + accent section titles */
+.tpl-modern-professional .cv-header {
+  background: #1e2a3a;
+  color: #fff;
+  padding: 40px 60px 28px;
+  margin: -56px -60px 24px;
+}
+.tpl-modern-professional .cv-name {
+  color: #fff;
+}
+.tpl-modern-professional .cv-contact-line {
+  color: #d8d4c8;
+}
+.tpl-modern-professional .cv-section-title {
+  color: #fff;
+  background: #b8862e;
+  border-bottom: none;
+  padding: 4px 10px;
+  display: inline-block;
+}
+
+/* Entry Level — friendly, slightly larger type */
+.tpl-entry-level {
+  font-size: 14.5px;
+}
+.tpl-entry-level .cv-name {
+  color: #1e2a3a;
+}
+.tpl-entry-level .cv-section-title {
+  color: #2f6f62;
+  border-bottom-color: #2f6f62;
+}
+
+/* ---- Small swatch previews used by the template picker ---- */
+.swatch-preview.tpl-clean-professional { background: #fff; border-color: #1e2a3a; }
+.swatch-preview.tpl-ats-friendly { background: #fff; border-color: #000; }
+.swatch-preview.tpl-modern-professional { background: linear-gradient(#1e2a3a 34%, #fff 34%); }
+.swatch-preview.tpl-entry-level { background: #fff; border-color: #2f6f62; }
